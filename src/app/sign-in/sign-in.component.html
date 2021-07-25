@@ -1,0 +1,46 @@
+<div class="box-container">
+
+  <div class="sign-in-page shadow-lg">
+
+    <div class="sign-in-container w3-animate-top">
+      <img src="../../assets/PEDDLER_free-file (7).png" class="logo" alt="" height="50" width="130">
+      <div class="form-container">
+        <p class="login-prompt font-weight-bold">Login to your account</p>
+        <p class="login-warning text-danger" *ngIf="errorInSignIn">Your credentials dont match <br> Please check your email and password</p>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="emailId">Email ID:</label><br>
+            <input type="text" formControlName="emailId"><br>
+            <span class="text-danger" *ngIf="!signInForm.get('emailId')?.valid && signInForm.get('emailId')?.touched">*Enter a valid Email ID</span>
+          </div>
+          <div>
+            <label for="password">Password:</label><br>
+            <div class="input-group">
+              <input [type]="fieldTextType ? 'text' : 'password'" formControlName="password"><br>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-lg"
+                  [ngClass]="{
+                    'fa-eye-slash': !fieldTextType,
+                    'fa-eye': fieldTextType
+                  }"
+                  (click)="toggleFieldTextType()"></i>
+                </span>
+             </div>
+            </div>
+            <span class="text-danger" *ngIf="!signInForm.get('password')?.valid && signInForm.get('password')?.touched">*Enter your password</span>
+          </div>
+          <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary submit" value="submit">
+            <i class="fa fa-sign-in"></i> Login</button><br>
+        </form>
+        <a class="text-dark create-account-link font-weight-bold" routerLink="/sign-up">Create new account?</a>
+      </div>
+      <a class="forgot-password-link " routerLink="/forgot-password">Forgot password?</a>
+    </div>
+
+    <app-carousel class="carousel w3-animate-bottom"></app-carousel>
+
+  </div>
+
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

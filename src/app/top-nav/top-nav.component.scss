@@ -1,0 +1,74 @@
+@import "../../styles.scss";
+
+.top-nav-container {
+    background-color: #f6f6f6;
+    color: black;
+    @extend .text-small, .text-capitalize, .fixed-top;
+
+    .top-nav {
+        padding: 18px 40px;
+        padding-right: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @extend .border-bottom;
+
+        .searchInput {
+            width: 250px;
+            background: none;
+            border: 1px solid red;
+            border: none;
+            border-bottom: 1px solid black;
+            color: black;
+            padding: 5px 10px;
+        }
+
+        .searchInput::placeholder {
+            color: black;
+        }
+
+        .searchInput:focus {
+            outline: none;
+        }
+
+        button {
+            background-color: #b32cf2;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+        }
+
+        .menu-item {
+            border-left: 5px solid transparent;
+        }
+
+        .menu-item:hover {
+            border-left: 5px solid #b32cf2;
+            color: #b32cf2;
+        }
+
+        .notification-icon {
+            cursor: pointer;
+            display: flex;
+            justify-content: end;
+            align-items: flex-end;
+
+            i {
+                color: black;
+            }
+            .badge {
+                margin-left: 0.2rem;
+                position: absolute;
+                color: rgb(179, 25, 25);
+                font-size: x-large;
+            }
+        }
+        .notification-icon:hover,
+        .notification-icon.active {
+            i {
+                @extend .text-purple;
+            }
+        }
+    }
+}

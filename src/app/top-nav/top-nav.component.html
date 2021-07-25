@@ -1,0 +1,51 @@
+<div class="top-nav-container shadow-sm">
+    <div class="top-nav">
+        <div class="d-flex align-items-center w-50">
+            
+            <span (click)="closePopUps()" routerLink = '/homepage' class="font-bold cursor-pointer text-x-large text-blue text-uppercase font-700">Peddler</span>
+            <div class="d-flex align-items-center" style="margin-left: 25px;"> 
+                <input (click)="closePopUps()" type="search" style="margin-left: 10px;" (keyup)="updateKeyword()" [(ngModel)]="searchKeyword" placeholder="Search for items" class="searchInput ml-2" >
+            </div>
+        </div>
+        <div class ="gethelp">
+            <h5>Request for Help <a href="https://varunatgit.github.io/TicketManager/" target="_blank">Here</a>.</h5>
+          
+        </div>
+        <div>
+            <button class="btn btn-success" onclick="location.href='http://localhost:9090/';"> Make Payment</button>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <div *ngIf="isLoggedIn" class="d-flex flex-column">
+                <a (click)="isNotificationsOpen=!isNotificationsOpen;isMenuOpen=false;dataService.showNotifications()"  class="notification-icon" [ngClass]="{'active':isNotificationsOpen}">
+                    <i class="fa fa-bell-o fa-lg" aria-hidden="true"></i>
+                    <span *ngIf="dataService.isUnseenNotifications()" class="badge">
+                      •
+                    </span>
+                </a>
+                <app-notifications *ngIf="isNotificationsOpen && dataService.isNotificationsVisible"></app-notifications>
+            </div>
+            <div *ngIf="isLoggedIn" class="ml-5 d-flex align-items-center">
+                <img class="cursor-pointer" *ngIf="isLoggedIn" routerLink = '/chat' src="../../assets/messages-icon.png" height="18px" width="18px">
+                <span *ngIf="unseenChats.length>0" class="text-danger font-700 text-x-small mb-3" style="margin-left: 2px;">
+                    {{unseenChats.length}}
+                </span>
+            </div>
+            <button *ngIf="isLoggedIn" class="ml-5" (click)="onCreateAdClick();closePopUps()">
+                Create Ads
+            </button>
+            <a class="cursor-pointer text-dark ml-1" *ngIf="!isLoggedIn" routerLink = "/sign-in" >Login</a>
+            <div *ngIf="isLoggedIn" class="d-flex flex-column align-items-center ml-5">
+                <a (click)="isMenuOpen=!isMenuOpen;isNotificationsOpen=false" class="cursor-pointer text-dark">My Profile</a>
+                <div *ngIf="isMenuOpen" class="card mt-4 shadow" style="position:absolute;z-index: 1;width: 12%;">
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/1' class="p-3 border-bottom menu-item text-dark cursor-pointer">Edit Profile</span>
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/2' class="p-3 border-bottom menu-item text-dark cursor-pointer">My Ads</span>
+                    <span (click)="isMenuOpen=false" *ngIf="isLoggedIn" routerLink = '/my-stats/action/3' class="cursor-pointer menu-item text-dark p-3 border-bottom text-dark">Saved Ads</span>
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/4' class="p-3 border-bottom menu-item text-dark cursor-pointer">Dashboard</span>
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/5' class="p-3 text-dark border-bottom cursor-pointer menu-item">Write to us </span>
+                    <span (click)="isMenuOpen=false" class="cursor-pointer text-dark p-3 menu-item" *ngIf="isLoggedIn" (click)="onLogOutClick()" routerLink = "/sign-in">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -1,0 +1,66 @@
+<div class="view-profile-page mt-2">
+  <div class="details-tab card mt-4">
+    <span *ngIf="!userDetails.picture">
+      <i class="fa fa-user fa-5x"></i>
+    </span>
+    <div class="images" *ngIf="userDetails.picture">
+      <img [src]="userDetails.picture" alt="">
+    </div>
+    <p class="name font-weight-bold mt-4">{{userDetails.firstName}} {{userDetails.lastName}}</p>
+    <div class="tabs-container mt-3">
+      <a (click)="contactTabOpened=true" [ngClass]="{'active':contactTabOpened}" class="contact-tab-button">Contact</a>
+      <a (click)="contactTabOpened=false" [ngClass]="{'active':!contactTabOpened}" class="stats-tab-button">Stats</a>
+    </div>
+    <div *ngIf="contactTabOpened" class="contact-tab tab mt-4">
+      <p class="label">Email ID:</p>
+      <p class="value font-weight-bold">{{userDetails.emailId}}</p>
+      <p class="label">Phone number:</p>
+      <p class="value font-weight-bold">{{userDetails.phone}}</p>
+    </div>
+    <div *ngIf="!contactTabOpened" class="stats-tab tab mt-4">
+      <p class="label">No of products bought:</p>
+      <p class="value-num font-weight-bold">{{userDetails.buyCount}}</p>
+      <p class="label">No of products sold:</p>
+      <p class="value-num font-weight-bold">{{userDetails.sellCount}}</p>
+      <p class="label">No of products donated:</p>
+      <p class="value-num font-weight-bold">{{userDetails.donationsCount}}</p>
+      <p class="label">User Rating:</p>
+      <!-- <p class="value font-weight-bold">{{userDetails.rating}}</p> -->
+      <star-rating class="value-num" [value]="userDetails.rating" [totalstars]="5" checkedcolor="#b32cf2" uncheckedcolor="rgb(200,200,200)" size="17px" [readonly]="true" ></star-rating>
+    </div>
+  </div>
+
+
+  <div class="live-ads-tab mt-2 mb-4">
+    <p class="font-weight-bold mb-4">Ads published by {{userDetails.firstName}} {{userDetails.lastName}}:</p>
+    <ng-container *ngFor="let ad of userAds"  class="w-100 ad-container">
+      <div routerLink="/ads/{{ad.adId}}" *ngIf="!ad.sold" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100">
+          <div class="d-flex w-100">
+              <img class="item-image" src={{ad.img1Url}}>
+              <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
+                  <div class="d-flex align-items-center w-100 justify-content-between" style="height: inherit;">
+                      <div class="d-flex flex-column">
+                          <span class="text-medium text-dark">{{ad.productName}}</span>
+                          <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
+                      </div>
+                  </div>
+                  <div class="d-flex flex-column mt-3">
+                      <span class="text-x-large text-dark font-700">₹ {{ad.initialPrice}}</span>
+                      <div class="d-flex justify-content-between mt-1">
+                          <span class="text-medium text-dark">{{ad.description}}</span>
+                          <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </ng-container>
+    <!-- <div class="ads-sub-container">
+      <ng-container *ngFor="let ad of userAds">
+        <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+      </ng-container>
+    </div> -->
+    <p class="no-ads-message mt-3" *ngIf="userAds.length==0">No ads published by this user yet</p>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

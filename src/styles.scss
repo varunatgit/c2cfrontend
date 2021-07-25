@@ -1,0 +1,175 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+app-root{
+  height: 100%;
+  width: 100%;
+}
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.font-mulish {
+  //font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-700{
+  font-weight: 700;
+}
+
+.text-x-small{
+  font-size: 12px;
+}
+
+.text-small{
+  font-size: 14px;
+}
+
+.text-medium{
+  font-size: 16px;
+}
+
+.text-large{
+  font-size: 18px;
+}
+
+.text-x-large{
+  font-size: 20px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-navyblue{
+  color:#3646a6;
+}
+
+.text-grey {
+  color: rgb(150, 157, 167);
+}
+
+.border-grey {
+  border-color: rgb(150, 157, 167);
+}
+
+.text-orange {
+  color: #ff8700;
+}
+
+.text-blue {
+  color: rgb(162,33,221);
+}
+
+.text-purple {
+  color: rgb(162,33,221);
+}
+
+.bg-orange {
+  background-color: #ff8700;
+}
+
+.bg-blue {
+  background-image: #b32cf2;
+}
+
+.bg-purple {
+  background-color: rgb(162,33,221);
+}
+
+.border-purple {
+  border-color: rgb(162,33,221);
+}
+
+.bg-light{
+  background-color: #f1f1f1;
+}
+
+.border-blue {
+  border-color: rgb(0, 119, 255);
+}
+
+.border-orange {
+  border-color: #ff8700;
+}
+
+.bg-light-orange {
+  background-image: linear-gradient(to left, rgb(255, 248, 227), rgb(252, 241, 222));
+}
+
+.bg-light-grey {
+  background-image: linear-gradient(to left, rgb(216,223,235), rgb(239, 243, 250));
+}
+
+.bg-light-purple {
+  background-color: rgb(241, 241, 241);
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-navyblue{
+  background-color: #3646a6;
+}
+
+.bg-white{
+  background-color:#ffff;
+}
+
+.bg-carousel{
+  background-image: linear-gradient(to right, #f5f7fa    ,  #c3cfe2 );
+}
+
+.w-32{
+  width: 32%;
+}
+
+.circle{
+  border-radius: 50%;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-darkgrey{
+    color: #6a817d;
+}
+
+.w-48{
+  width: 48%;
+}
+
+.w-32{
+  width: 32%;
+}
+
+.btn-theme {
+  background-color: #b32cf2;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+}
+
+.btn-second-theme {
+  border:2px solid #b32cf2;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  color: #b32cf2;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+

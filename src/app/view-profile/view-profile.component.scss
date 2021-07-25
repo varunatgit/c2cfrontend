@@ -1,0 +1,123 @@
+@import '../../styles.scss';
+
+.view-profile-page {
+  @extend .font-mulish, .text-large, .bg-light-purple;
+  display: flex;
+  justify-content: space-evenly;
+  min-height: 100%;
+
+  .card {
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    align-items: center;
+  }
+
+  .details-tab {
+    width: 28%;
+    height:fit-content;
+
+    span {
+      margin-top: 2rem;
+      height: 8rem;
+      width: 8rem;
+      border: 0.1rem solid grey;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @extend .bg-light-purple;
+    }
+
+    .images {
+      margin-top: 2rem;
+      width: 8rem;
+      height: 8rem;
+      display: flex;
+      flex-direction: column;
+      border: 0.1rem solid grey;
+      border-radius: 50%;
+      @extend .bg-black;
+      overflow: hidden;
+
+      img {
+        height: 115px;
+        width: 100%;
+      }
+    }
+
+    .name {
+      @extend .text-x-large, .text-purple;
+    }
+
+    .tabs-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 50% 50%;
+
+      a {
+        @extend .text-black, .text-medium;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        border-bottom: 0.1px solid gray;
+      }
+
+      a.active {
+        @extend .text-purple;
+        border-bottom: 3px solid #b32cf2;
+      }
+
+    }
+
+    .tab {
+      display: grid;
+      width: 70%;
+      grid-template-columns: 1fr 1fr;
+      @extend .text-small;
+
+      .label {
+        font-weight: bold;
+
+      }
+      .value {
+        text-align: left;
+        @extend .text-purple;
+      }
+
+      .value-num {
+        text-align: center;
+        @extend .text-purple;
+      }
+    }
+  }
+
+  .live-ads-tab {
+    height: fit-content;
+    width: 66%;
+    padding: 1rem 2rem 2rem 2rem;
+
+    p {
+      @extend .text-large,.text-black,.text-uppercase;
+    }
+
+    p.no-ads-message {
+      @extend .text-small, .text-grey;
+    }
+
+    .ad-container {
+      height: 10%;
+    }
+
+    .item-image{
+      height: 130px;
+      width: 180px;
+    }
+
+    .ads-sub-container{
+      column-gap: 30px;
+      row-gap: 30px;
+      display: grid;
+      grid-template-columns: 31% 31% 31%;
+    }
+  }
+}

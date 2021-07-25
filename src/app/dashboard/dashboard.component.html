@@ -1,0 +1,72 @@
+<div class="main-container">
+    <div class="d-flex flex-column mx-auto">
+        <div class="d-flex align-items-center">
+            <span [ngClass]="{'active':isSoldOpen}" (click)="isSoldOpen=!isSoldOpen" class="card p-2 cursor-pointer shadow text-center">Sold</span>
+            <span [ngClass]="{'active':!isSoldOpen}" (click)="isSoldOpen=!isSoldOpen" class="card p-2 cursor-pointer shadow text-center ml-2">Bought</span>
+        </div>
+        <div *ngIf="isSoldOpen" class="d-flex flex-column mt-4 w-100 mx-auto" style="row-gap: 10px;">
+
+            <ng-container *ngFor="let ad of soldAds" class="w-100">
+                <div class="d-flex flex-column">
+                    <div routerLink="/ads/{{ad.adId}}" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100 h-100">
+                        <div class="d-flex w-100 h-100">
+                            <img class="item-image" src={{ad.img1Url}}>
+                            <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
+                                <div class="d-flex align-items-center w-100 justify-content-between" style="height: inherit;">
+                                    <div class="d-flex flex-column">
+                                        <span class="text-medium text-dark">{{ad.productName}}</span>
+                                        <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
+                                    </div>
+                                    <div *ngIf="ad.adType==3 && ad.sold" (click)="stopPropogation($event);reconductAuction(ad.adId)" class="d-flex align-items-center">
+                                        <img src="../../assets/undo-icon.png" height="18px" width="18px">
+                                        <span class="ml-1 text-blue text-small cursor-pointer">Reconduct Auction</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column mt-3">
+                                    <span class="text-x-large text-dark font-700">₹ {{ad.finalPrice}}</span>
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <span class="text-medium text-dark">{{ad.description}}</span>
+                                        <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="!isSoldOpen" class="d-flex flex-column mt-4 w-100 mx-auto" style="row-gap: 10px;">
+            <ng-container *ngFor="let ad of boughtAds" class="w-100">
+                <div routerLink="/ads/{{ad.adId}}" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100 h-100">
+                    <div class="d-flex w-100 h-100">
+                        <img class="item-image" src={{ad.img1Url}}>
+                        <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
+                            <div class="d-flex align-items-center w-100 justify-content-between" style="height: inherit;">
+                                <div class="d-flex flex-column">
+                                    <span class="text-medium text-dark">{{ad.productName}}</span>
+                                    <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column mt-3">
+                                <span class="text-x-large text-dark font-700">₹ {{ad.finalPrice}}</span>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <span class="text-medium text-dark">{{ad.description}}</span>
+                                    <div class="d-flex align-items-center flex-column">
+                                        <span *ngIf="isNowRated(ad.adId)" class="text-darkgrey text-small w3-animate-opacity">Thanks for the rating</span>
+                                        <ngb-rating *ngIf="!ad.rated" [(rate)]="ad.sellerRating" (click)="stopPropogation($event)" (rateChange)="onRateChange(ad.adId,ad.sellerId,ad.sellerRating)" [max]="5">
+                                            <ng-template let-fill="fill" let-index="index">
+                                              <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                    <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

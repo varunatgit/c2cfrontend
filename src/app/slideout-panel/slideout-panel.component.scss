@@ -1,0 +1,18 @@
+@import "../../styles.scss";
+
+.tab{
+    border-left: 5px solid transparent;
+    @extend .d-flex,.align-items-center,.justify-content-between,.p-4,.border-bottom,.cursor-pointer;
+}
+
+.tab:hover,.active-tab{
+    border-left: 5px solid #B32CF2;
+    color: #B32CF2;
+}
+@media only screen and (max-width:600px) {
+  .body {
+    .side-nav {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+<div  class="h-100 w-100">
+  <div style="position: fixed;z-index: 1;" (click)="contactSellerVisible=false"  *ngIf="contactSellerVisible" class="w-100 shadow h-100 d-flex align-items-center justify-content-center">
+    <app-contact-seller class="w-25 w3-animate-bottom h-75" [seller]="seller"></app-contact-seller>
+  </div>
+  <app-user-chat (hideChatWindow)="isChatOpen=false" *ngIf="isChatOpen" class="chat card shadow" [ad]="ad" [seller]="seller"></app-user-chat>
+
+  <div [ngClass]="{'blur':contactSellerVisible}" class="ad-detail w-100">
+    <div class="ad-detail-container" >
+      <div class="d-flex flex-column">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li *ngIf="ad.img2Url!=null && ad.img2Url!=''  || ad.img3Url!=null && ad.img3Url!='' "
+              data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li *ngIf="ad.img2Url!=null && ad.img2Url!=''" data-target="#myCarousel" data-slide-to="1"></li>
+            <li *ngIf="ad.img3Url!=null && ad.img3Url!='' " data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div *ngIf="ad.img1Url!=null" class="carousel-item active" data-interval="3500">
+              <img src={{ad.img1Url}} alt="slide-1">
+            </div>
+            <div *ngIf="ad.img2Url!=null && ad.img2Url!=''" class="carousel-item" data-interval="4000">
+              <img src={{ad.img2Url}} alt="slide-2">
+            </div>
+            <div *ngIf="ad.img3Url!=null && ad.img3Url!=''" class="carousel-item" data-interval="4000">
+              <img src={{ad.img3Url}} alt="slide-3">
+            </div>
+          </div>
+          <a *ngIf="ad.img2Url!=null && ad.img2Url!=''  || ad.img3Url!=null && ad.img3Url!=''" href="#myCarousel"
+            class="carousel-control-prev" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a *ngIf="ad.img2Url!=null && ad.img2Url!=''  || ad.img3Url!=null && ad.img3Url!=''" href="#myCarousel"
+            class="carousel-control-next" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+      </div>
+      <div class="d-flex flex-column"  style="width: 60%;margin-left: 50px;">
+        <div class="ad-detail-sub-container">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column">
+              <span class="item-name">{{ad.productName}}</span>
+              <div class="d-flex mt-1">
+                <span class="text-small text-darkgrey">{{ad.views}} views</span>
+              </div>
+              <div *ngIf="!isAuction" class="d-flex align-items-center mt-3">
+                <span  class="item-price">₹ {{ad.initialPrice}}</span>
+                <span *ngIf="ad.adType==4" class="text-dark text-medium ml-2">per day</span>
+              </div> 
+              <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
+                <span class="item-price">₹ {{ad.finalPrice}}</span>
+                <span *ngIf="isAuctionOver && buyer==null" class="text-dark ml-2">unsold</span>
+                <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-2">base price</span>
+                <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+                <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+                <i *ngIf="buyer!=null && !buyer.picture" routerLink="/profile/{{buyer.id}}" class="fa fa-user fa-x circle border p-1 bg-light cursor-pointer ml-2"></i>
+                <img *ngIf="buyer!=null && buyer.picture" height="20px" width="20px" class="circle border ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}" src={{buyer.picture}}>
+              </div>
+            </div>
+    
+            <svg (click)="saveAd(ad)" *ngIf="isLoggedIn && !isAdSaved(ad.adId)" width="24px" height="24px"
+              viewBox="0 0 1024 1024" data-aut-id="icon" class="cursor-pointer" fill-rule="evenodd">
+              <path class="rui-77aaa"
+                d="M830.798 448.659l-318.798 389.915-317.828-388.693c-20.461-27.171-31.263-59.345-31.263-93.033 0-85.566 69.605-155.152 155.152-155.152 72.126 0 132.752 49.552 150.051 116.364h87.777c17.299-66.812 77.905-116.364 150.051-116.364 85.547 0 155.152 69.585 155.152 155.152 0 33.687-10.802 65.862-30.293 91.811zM705.939 124.121c-80.853 0-152.204 41.425-193.939 104.204-41.736-62.778-113.086-104.204-193.939-104.204-128.33 0-232.727 104.378-232.727 232.727 0 50.657 16.194 98.948 47.806 140.897l328.766 402.133h100.189l329.716-403.355c30.662-40.727 46.856-89.018 46.856-139.675 0-128.349-104.398-232.727-232.727-232.727z">
+              </path>
+            </svg>
+            <svg (click)="unSaveAd(ad.adId)" *ngIf="isLoggedIn && isAdSaved(ad.adId)" width="24px" height="24px"
+              viewBox="0 0 1024 1024" data-aut-id="icon" class="cursor-pointer" fill-rule="evenodd">
+              <path class="rui-77aaa"
+                d="M705.941 124.121c-80.853 0-152.204 41.445-193.939 104.204-41.736-62.759-113.086-104.204-193.939-104.204-128.33 0-232.727 104.398-232.727 232.727 0 50.657 16.194 98.967 47.806 140.916l328.766 402.114h100.189l329.716-403.355c30.662-40.708 46.856-89.018 46.856-139.675 0-128.33-104.398-232.727-232.727-232.727z">
+              </path>
+            </svg>
+          </div>
+    
+          <div class="d-flex align-items-center mt-3" *ngIf="!isAuction && isLoggedIn && user.id==seller.id">
+            <input (change)="toogleSoldStatus()" [checked]="ad.sold" type="checkbox" height="30px" width="30px">
+            <span *ngIf="!ad.sold" class="text-dark text-small text-blue ml-2">Mark it as <b class="text-blue">SOLD</b> !</span>
+            <span *ngIf="ad.sold" class="text-dark text-small text-blue ml-2">Mark it as <b class="text-blue">UNSOLD</b> !</span>
+          </div>
+
+          <div *ngIf="isAuction && !isAuctionOver && timeRemaining<86400" class="d-flex mt-2 align-items-center">
+            <span class="text-small">Auction ends in</span>
+            <countdown  class="text-large font-700 ml-2"
+              [config]="{ leftTime: timeRemaining,format: 'HH:mm:ss'}"></countdown>
+          </div>
+    
+    
+          <span *ngIf="isAuction && isAuctionOver" class="mt-2 text-medium font-700 text-danger">AUCTION
+            OVER !</span>
+    
+          <div *ngIf="isLoggedIn && !isAuction && seller.id!=user.id" class="w-100 d-flex justify-content-between mt-3 mb-2">
+            <button (click)="contactSellerVisible=!contactSellerVisible" class="btn-theme w-48">Call</button>
+            <button (click)="isChatOpen=true" class="btn-second-theme w-48">Chat with seller</button>
+          </div>
+    
+          <div *ngIf="isLoggedIn && isAuction && !isAuctionOver && isLoggedIn && user.id!=seller.id" class="d-flex flex-column mt-3">
+            <div *ngIf="!bidInProcess && !bidDone" class="w-100 d-flex justify-content-between">
+              <input type="tel" [(ngModel)]="userBidPrice" class="w-48 form-control" placeholder="Enter your price">
+              <button (click)="bid()" class="btn-theme w-48">Bid</button>
+            </div>
+            <p class="status" *ngIf="bidInProcess">
+              <i class="fa fa-spinner fa-pulse"></i> Bidding..</p>
+              <p class="status" *ngIf="bidDone">
+                <i class="fa fa-check"></i> Bid Done!</p>
+            <label *ngIf="isBidClicked && userBidPrice<expectedBidPrice" class="text-small mt-1 text-danger">Next bid price
+              should be at least {{expectedBidPrice}}</label>
+          </div>
+        </div>
+    
+        <div class="d-flex flex-column mt-3">
+          <div class="d-flex align-items-center flex-row shadow card tabs-container">
+            <span (click)="isDetailVisible=!isDetailVisible" [ngClass]="{'active-tab':isDetailVisible}" class="text-small cursor-pointer tab">Ad Details</span>
+            <span (click)="isDetailVisible=!isDetailVisible" [ngClass]="{'active-tab':!isDetailVisible}" class="text-small cursor-pointer tab">Description</span>
+          </div>
+          <div class="ad-detail-sub-container">
+            <div *ngIf="isDetailVisible" class="d-flex flex-column">
+              <div class="d-flex justify-content-between">
+                <span class="text-darkgrey">Seller:</span>
+                <span (click)="visitProfile()" class="font-700 seller-name" style="margin-left: 5px;">{{seller.firstName+" "+seller.lastName}}</span>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <span class="text-darkgrey">Seller Rating:</span>
+                <span class="text-dark font-700" style="margin-left: 5px;">{{seller.rating | number : '1.1-1'}}/5</span>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <span class="text-darkgrey">Brand Name:</span>
+                <span class="text-dark font-700" style="margin-left: 5px;">{{ad.brandName}}</span>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <span class="text-darkgrey">Date Posted:</span>
+                <span class="text-dark font-700" style="margin-left: 5px;">{{ad.adCreated | date}}</span>
+              </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <span class="text-darkgrey">Category:</span>
+                <span class="text-dark font-700" style="margin-left: 5px;">{{category.categoryName}}</span>
+              </div>
+              <div *ngIf="isAuction" class="d-flex mt-1 justify-content-between">
+                <span class="text-darkgrey">Auction Deadline:</span>
+                <span class="text-dark font-700" style="margin-left: 5px;">{{ad.auctionDeadline | date : 'medium'}}</span>
+              </div>
+            </div>
+      
+            <span *ngIf="!isDetailVisible" style="min-height: 120px;" class="d-flex flex-column text-darkgrey text-small">
+              {{ad.description}}
+            </span>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -1,0 +1,71 @@
+<div class="ads-list-container">
+    <div class="filter-section">
+        <div class="filter-container">
+            <div class="buy-donate-container">
+                <label class="filter-name">Select One</label>
+                <div class="buy-donate-sub-container">
+                    <span class="tab" (click)="setAdType(2)" [ngClass]="{'active-tab':adType==2}">Buy</span>
+                    <span class="tab" (click)="setAdType(1)" [ngClass]="{'active-tab':adType==1}">Donation</span>
+                    <span class="tab" (click)="setAdType(3)" [ngClass]="{'active-tab':adType==3}">Auction</span>
+                    <span class="tab" (click)="setAdType(4)" [ngClass]="{'active-tab':adType==4}">Rent</span>
+                </div>
+            </div>
+            <div (click)="toogleWithinCompanyFilter()" class="d-flex align-items-center cursor-pointer">
+                <input [checked]="withinCompany"  type="checkbox">
+                <span class="text-dark text-medium ml-2">See within company ads</span>
+            </div>
+        </div>
+        <div class="filter-container" *ngIf="adType!=1">
+            <div class="price-range-container" >
+                <label class="filter-name">Price range</label>
+                <div class="price-range-sub-container">
+                    <div class="custom-slider">
+                        <ngx-slider class="p-0 m-0" [(value)]="startPrice" [(highValue)]="endPrice" [options]="options"></ngx-slider>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <label class="filter-value">{{startPrice}}</label>
+                        <label class="filter-value">{{endPrice}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-container">
+            <div class="category-container">
+                <label class="filter-name">Select Category</label>
+                <div class="category-sub-container">
+                    <div class="category-row" *ngFor="let category of categories">
+                        <label class="filter-value">{{category.categoryName}}</label>
+                        <input [checked]="isCategorySelected(category.categoryId)" (change)="addOrRemoveCategory(category.categoryId)" type="checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ads-section">
+        <div class="ads-container mt-3">
+            <div class="border-bottom d-flex flex-row align-items-center" style="border-bottom: 2px solid #dee2e6 !important;">
+                <!--<span class="heading">All Ads</span>
+                <div class="d-flex ml-auto align-items-center">
+                    <span class="heading">SORT BY</span>
+                    <select [(ngModel)]="sortOption" (change)="sortList()" style="margin-left: 20px;background: none;border: none;">
+                        <option value="1">Recenty Added</option>
+                        <option value="2">Trending</option>
+                    </select>
+                </div>-->
+                <span class="heading p-2">SORT By</span>
+                <div class="d-flex ml-4">
+                    <span (click)="sortOption=1;sortList()" [class.sort-active-tab]="sortOption==1" class="sort-tab">Recenty Added</span>
+                    <span (click)="sortOption=2;sortList()" [class.sort-active-tab]="sortOption==2" class="sort-tab ml-3">Trending</span>
+                    <span (click)="sortOption=3;sortList()" [class.sort-active-tab]="sortOption==3" class="sort-tab ml-3">Price - Low to High</span>
+                    <span (click)="sortOption=4;sortList()" [class.sort-active-tab]="sortOption==4" class="sort-tab ml-3">Price - High to Low</span>
+                </div>
+            </div>
+            <div class="ads-sub-container" style="margin-top: 30px;">
+                <ng-container *ngFor="let ad of ads  | filter : companyName: searchKeyword : adType : selectedCategories : startPrice : endPrice">
+                    <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

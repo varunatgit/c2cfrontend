@@ -1,0 +1,26 @@
+<div class="d-flex body p-5" style="background-color: #f1f1f1;min-height: 100%;">
+    <div class="d-flex side-nav flex-column card shadow h-100 w-25">
+        <div [ngClass]="{'active-tab':currentTab==1}" class="tab" (click)="setCurrentTab(1)">
+            <span>Edit Profile</span>
+        </div>
+        <div [ngClass]="{'active-tab':currentTab==2}" class="tab" (click)="setCurrentTab(2)">
+            <span>My Ads</span>
+        </div>
+        <div [ngClass]="{'active-tab':currentTab==3}" class="tab" (click)="setCurrentTab(3)">
+            <span>Saved Ads</span>
+        </div>
+        <div [ngClass]="{'active-tab':currentTab==4}" class="tab" (click)="setCurrentTab(4)">
+            <span>Dashboard</span>
+        </div>
+        <div [ngClass]="{'active-tab':currentTab==5}" class="tab" (click)="setCurrentTab(5)">
+            <span>Write to us</span>
+        </div>
+    </div>
+    <div class="ml-5 w-75">
+        <app-user-profile *ngIf="currentTab==1"></app-user-profile>
+        <app-my-ads *ngIf="currentTab==2"></app-my-ads>
+        <app-saved-ads *ngIf="currentTab==3"></app-saved-ads>
+        <app-dashboard *ngIf="currentTab==4"></app-dashboard>
+        <app-help *ngIf="currentTab==5"></app-help>
+    </div>
+</div>

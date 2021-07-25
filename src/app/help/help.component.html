@@ -1,0 +1,18 @@
+<div class="help-page">
+  <div class="help-tab card" style="padding-bottom: 60px;">
+    <p class="help-header font-weight-bold">Write to us</p>
+    <p class="status" *ngIf="sendingMail">
+      <i class="fa fa-spinner fa-pulse"></i> Sending Mail</p>
+    <p class="status" *ngIf="mailSent">
+      <i class="fa fa-check"></i> Mail sent</p>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="supportForm">
+      <textarea formControlName="message" rows="5" name="message"></textarea>
+      <span class="text-danger" *ngIf="!supportForm.get('message')?.valid && supportForm.get('message')?.touched">*Message must be atleast 10 characters</span>
+      <button [disabled]="!supportForm.valid" class="btn btn-primary">
+        <i class="fa fa-envelope"></i> Submit</button>
+    </form>
+
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

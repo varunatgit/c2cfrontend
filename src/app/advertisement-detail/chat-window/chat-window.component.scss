@@ -1,0 +1,28 @@
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+
+.messages-container{
+    overflow-y: auto;
+    row-gap: 15px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sender-message{
+    background-color: #b32cf2;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    max-width: 190px;
+    min-width: 92px;
+}
+
+.receiver-message{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    max-width: 190px;
+    min-width: 92px;
+    @extend .bg-light;
+}

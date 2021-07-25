@@ -1,0 +1,30 @@
+<div class="main-container">
+    <div class="d-flex flex-column mx-auto">
+        <div *ngIf="!isLoading" class="d-flex flex-column w-100 mx-auto" style="row-gap: 10px;">
+            <ng-container *ngFor="let ad of savedAds" class="w-100">
+                <!--<app-ad-detailed-card *ngIf="setAd(ad)" class="w-100"></app-ad-detailed-card>-->
+                <div routerLink="/ads/{{ad.adId}}" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100 h-100">
+                    <div class="d-flex w-100 h-100">
+                        <img class="item-image" src={{ad.img1Url}}>
+                        <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
+                            <div class="d-flex align-items-center w-100 justify-content-between" style="height: inherit;">
+                                <div class="d-flex flex-column">
+                                    <span class="text-medium text-dark">{{ad.productName}}</span>
+                                    <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
+                                </div>
+                                <img (click)="unsaveAd(ad.adId,$event)" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=" class="_2Nq6Qc cursor-pointer">
+                            </div>
+                            <div class="d-flex flex-column mt-3">
+                                <span class="text-x-large text-dark font-700">₹ {{ad.finalPrice}}</span>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <span class="text-medium text-dark">{{ad.description}}</span>
+                                    <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

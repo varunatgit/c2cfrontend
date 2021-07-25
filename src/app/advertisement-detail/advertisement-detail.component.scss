@@ -1,0 +1,87 @@
+@import "../../styles.scss";
+
+
+.chat{
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+.ad-detail{
+    @extend .bg-light;
+    min-height: 100%;
+    padding: 50px;
+
+    .ad-detail-container{
+        display: flex;
+        height: 100%;
+        
+        .carousel{
+            height: 400px;
+            width: 700px;
+
+            background-color: white;
+            @extend .card;
+
+            img{
+                height: 400px;
+                width: 700px;
+            }
+        }
+
+        .tabs-container{
+            .tab{
+                padding: 10px 20px;
+            }
+            .active-tab{
+                color: #b32cf2;
+                font-weight: 700;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid #b32cf2;
+            }
+        }
+
+        .ad-detail-sub-container{
+            display: flex;
+            flex-direction: column;
+            padding: 20px 20px;
+            @extend .card,.shadow;
+
+            .seller-name {
+              color: #b32cf2;
+              cursor: pointer;
+              text-decoration: underline;
+            }
+
+            .item-price{
+                color: #b32cf2;
+                font-weight: 700;
+                font-size: 20px;
+            }
+
+            .item-name{
+                font-weight: 700;
+                @extend .text-capitalize;
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.blur {
+    opacity: 0.2;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.end{
+    display: flex;
+    margin-top: auto;
+}

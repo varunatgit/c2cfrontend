@@ -1,0 +1,31 @@
+.main-container{
+    background-color: #f1f1f1;
+    min-height: 100vh;
+}
+
+.active{
+    border: 1px solid #B32CF2;
+    color: #B32CF2;
+}
+
+.item-image{
+    height: 130px;
+    width: 180px;
+}
+
+.star {
+    font-size: 2rem;
+    color: #b0c4de;
+}
+
+.filled {
+    color: #1e90ff;
+}
+
+.bad {
+    color: #deb0b0;
+}
+
+.filled.bad {
+    color: #ff1e1e;
+}

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "c2c-marketplace": {
+      "hosting": {
+        "c2c-marketplace": [
+          "c2c-marketplace"
+        ]
+      }
+    }
+  }
+}

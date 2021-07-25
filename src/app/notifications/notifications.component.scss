@@ -1,0 +1,75 @@
+@import "../../styles.scss";
+
+.notifications {
+
+  .notifications-tab {
+    position: absolute;
+    z-index: 1;
+    width: 25%;
+    max-height: 25rem;
+    margin-top: 0.8rem;
+    margin-left: -4rem;
+    overflow-y: scroll;
+
+    .menu-item {
+      cursor: pointer;
+      border-left: 3px solid transparent;
+
+      .notification-details {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        align-items: center;
+
+        i {
+          height: 3rem;
+          width: 3rem;
+          border: 0.1rem solid grey;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          @extend .bg-light-purple;
+        }
+
+        img {
+          height: 3rem;
+          width: 3rem;
+          border-radius: 50%;
+        }
+
+        .title {
+          @extend .text-grey;
+        }
+      }
+
+      .time {
+        @extend .text-grey;
+        font-size: xx-small;
+        float: right;
+        margin-bottom: 0%;
+      }
+    }
+
+    .menu-item:hover {
+      border-left: 3px solid rgb(162,33,221);
+    }
+
+    .menu-item.unseen {
+      p {
+        @extend .text-black;
+        font-weight: bold;
+      }
+    }
+
+  }
+
+  .notifications-tab::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+
+  .notifications-tab::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    @extend .bg-purple;
+  }
+
+}

@@ -1,0 +1,51 @@
+@import "../../styles.scss";
+
+.ad{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    cursor: pointer;
+    @extend .card,.shadow;
+
+    .item-photo{
+      height: 180px;
+      width: 100%;
+    }
+
+    .ad-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: white;
+
+      .ad-details-container {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .item-price {
+          @extend .text-dark, .text-x-large;
+          font-weight: 700;
+        }
+
+        .item-name {
+          @extend .text-darkgrey, .text-medium;
+        }
+      }
+
+      .card-footer{
+        .detail{
+          @extend .text-small;
+        }
+      }
+
+      img {
+        padding-right: 15px;
+        
+      }
+    }
+  }
+
+.ad:hover{
+    @extend .shadow-lg;
+}

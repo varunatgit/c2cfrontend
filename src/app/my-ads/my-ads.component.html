@@ -1,0 +1,43 @@
+
+<div class="main-container">
+    <div class="d-flex flex-column mx-auto">
+        <span *ngIf="false" class="font-700 text-dark" style="font-size: 20px;">My Ads</span>
+        <div *ngIf="!isLoading" class="d-flex flex-column w-100 mx-auto" style="row-gap: 10px;">
+          <ng-container *ngFor="let ad of myAds" class="w-100">
+            <div class="d-flex flex-column">
+              <div routerLink="/ads/{{ad.adId}}" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100 h-100">
+                <div class="d-flex w-100 h-100">
+                  <img class="item-image" src={{ad.img1Url}}>
+                  <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
+                    <div class="d-flex align-items-center w-100 justify-content-between" style="height: inherit;">
+                      <div class="d-flex flex-column">
+                        <span class="text-medium text-dark">{{ad.productName}}</span>
+                        <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
+                      </div>
+                      <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center ml-auto">
+                          <img height="16px" width="16px" class="cursor-pointer" *ngIf="!ad.sold" (click)="editAd(ad.adId,$event)" src="../../assets/edit-icon.png">
+                          <img height="16px" width="12px" class="ml-3 cursor-pointer" *ngIf="!ad.sold" (click)="deleteAd(ad.adId,$event)" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=">
+                        </div>
+                        <div *ngIf="ad.adType==3 && isAuctionOver(ad)" (click)="stopPropogation($event);reconductAuction(ad.adId)" class="d-flex mt-3 align-items-center">
+                          <img src="../../assets/undo-icon.png" height="18px" width="18px">
+                          <span class="ml-1 text-blue text-small cursor-pointer">Reconduct Auction</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-column mt-3">
+                      <span class="text-x-large text-dark font-700">₹ {{ad.finalPrice}}</span>
+                      <div class="d-flex justify-content-between mt-1">
+                        <span class="text-medium text-dark">{{ad.description}}</span>
+                        <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span *ngIf="ad.adType==3 && ad.sold" class="ml-auto text-blue text-medium cursor-pointer">Reconduct Auction</span>
+          </ng-container>
+        </div>
+    </div>
+</div>

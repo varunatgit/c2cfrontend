@@ -1,0 +1,62 @@
+stages:
+  - build
+  - deploy
+
+build_job:
+  image: node:12-alpine
+  stage: build
+  before_script:
+    - echo "Installing NPM Dependencies and building Angular Application"
+  script:
+    - npm install 
+    - npm install -g @angular/cli
+    - ng build --prod --output-hashing none
+  tags:
+    - gitlab-autoscaling-aws
+  only:
+    - master
+  cache:
+    key: install-cache
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - dist/
+
+gcloud_deploy:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  dependencies: 
+    - build_job
+  tags:
+    - gitlab-autoscaling-aws
+  only:
+    - master
+  before_script:
+  - |
+    cat <<EOF >> $CI_PIPELINE_ID.json
+    {
+      "type": "service_account",
+      "project_id": "hu18-groupa-angular",
+      "private_key_id": "$PRIVATE_KEY_ID",
+      "private_key": "$PRIVATE_KEY",
+      "client_email": "hu191-serviceaccount@hu18-groupa-angular.iam.gserviceaccount.com",
+      "client_id": "114225494472944112392",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hu191-serviceaccount%40hu18-groupa-angular.iam.gserviceaccount.com"
+      }
+    EOF
+  - "cat $CI_PIPELINE_ID.json"
+  
+  script:
+  - gcloud auth activate-service-account --key-file $CI_PIPELINE_ID.json
+  - gcloud --project hu18-groupa-angular app deploy --version v1 --appyaml app.yaml
+  - url=$(gcloud app services browse c2c-marketplace-frontend --no-launch-browser --project hu18-groupa-angular)
+  - echo $url
+  
+  after_script:
+  - rm $CI_PIPELINE_ID.json
+
+

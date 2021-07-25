@@ -1,0 +1,61 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+service: c2c-marketplace-frontend
+instance_class: B1
+manual_scaling:
+        instances: 1
+handlers:
+  - url: /(.+\.js)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.js)
+
+  - url: /(.+\.css)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.css)
+
+  - url: /(.+\.png)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.png)
+
+  - url: /(.+\.jpg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.jpg)
+
+  - url: /(.+\.jpeg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.jpeg)
+     
+  - url: /(.+\.webp)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.webp)
+    
+  - url: /(.+\.svg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.svg)
+
+  - url: /favicon.ico
+    static_files: dist/c2c-marketplace/favicon.ico
+    upload: dist/c2c-marketplace/favicon.ico
+
+  - url: /(.+\.json)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.json)
+
+  - url: /(.+)
+    static_files: dist/c2c-marketplace/index.html
+    upload: dist/c2c-marketplace/index.html
+
+  - url: /
+    static_files: dist/c2c-marketplace/index.html
+    upload: dist/c2c-marketplace/index.html
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE

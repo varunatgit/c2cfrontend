@@ -1,0 +1,32 @@
+<div class="w-100 h-100 d-flex flex-column">
+    <div class="p-3 border-bottom bg-light">
+        <div class="d-flex align-items-center justify-content-between">
+            <span class="text-medium font-700">Chat</span>
+            <img class="cursor-pointer" (click)="closeChatWindow()" src="../../../assets/close-icon.png" height="20px" width="20px">
+        </div>
+    </div>
+    <div  class="d-flex flex-column">
+        <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="messages-container p-3 pb-0">
+            <ng-container *ngFor="let key of messagesMap.keys()">
+                <div class="d-flex flex-column">
+                    <span class="text-darkgrey text-small ml-auto mr-auto">{{key}}</span>
+                    <ng-container *ngFor="let message of messagesMap.get(key)">
+                        <div class="d-flex flex-column mt-3">
+                            <div *ngIf="message.senderId==user.id" class="d-flex flex-column ml-auto">
+                                <span  class="sender-message shadow">{{message.message}}</span>
+                                <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "shortTime"}}</span>
+                            </div>
+                            <div *ngIf="message.receiverId==user.id" class="d-flex flex-column mr-auto">
+                                <span class="receiver-message shadow">{{message.message}}</span>
+                                <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "shortTime"}}</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+        <div class="d-flex p-3 pt-0 mt-auto justify-content-between">
+            <input (keyup.enter)="addMessage()" placeholder="type your message..." [(ngModel)]="message" class="form-control w-100">
+        </div>
+    </div>
+</div>

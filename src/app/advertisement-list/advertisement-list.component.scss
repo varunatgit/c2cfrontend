@@ -1,0 +1,175 @@
+@import "../../styles.scss";
+
+.ads-list-container{
+  display: flex;
+  min-height: 100%;
+  background-color: #f1f1f1;
+  padding: 40px 40px;
+
+  .heading{
+    @extend .text-medium,.text-dark,.text-uppercase;
+    font-weight: bold
+  }
+
+  .sort-tab{
+    @extend .text-dark,.p-2,.text-uppercase,.text-small,.cursor-pointer;
+  }
+
+  .sort-active-tab{
+    @extend .font-700,.cursor-pointer;;
+    color: #B32CF2 !important;
+    border-bottom: 2px solid #B32CF2;
+  }
+
+  .filter-section{
+      width: 25%;
+      height: 100%;
+      border-right: 0px solid #dee2e6;
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+        
+      .filter-container{
+          display: flex;
+          flex-direction: column;
+          row-gap: 30px;
+          padding: 30px;
+          @extend .border,.card;
+
+          .filter-name{
+              @extend .heading;
+          }
+
+          .filter-value{
+              @extend .text-medium,.text-dark,.text-capitalize;
+          }
+
+          .buy-donate-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .buy-donate-sub-container{
+                  display: flex;
+                  flex-flow: row wrap;
+                  column-gap: 8px;
+                  row-gap: 10px;
+
+                  .tab{
+                      border: 2px solid gray;
+                      @extend .text-center,.text-capitalize,.text-small;
+                      padding: 5px;
+                      cursor: pointer;
+                  }
+
+                  .active-tab{
+                      border:2px solid #B32CF2;
+                      color: #B32CF2;
+                  }
+              }
+          }
+
+          .price-range-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .price-range-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
+              }
+          }
+
+          .category-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .category-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
+
+                  .category-row{
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                  }
+              }
+          }
+      }
+  }
+
+  .ads-section{
+    width: 75%;
+    margin-left: 20px;
+    padding: 0px 25px;
+    
+    .ads-container{
+      display: flex;
+      flex-direction: column;
+
+      .heading{
+        @extend .text-medium,.text-dark,.text-uppercase;
+        font-weight: bold
+      }
+
+      .ads-sub-container{
+        column-gap: 30px;
+        row-gap: 30px;
+        display: grid;
+        grid-template-columns: 31% 31% 31%;
+      }
+
+    }
+  }
+}
+
+
+// We need to use ::ng-deep to overcome view encapsulation
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-bar {
+      background: lightblue;
+      height: 4px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-selection {
+      background: #B32CF2;
+    }
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+      width: 15px;
+      height: 16px;
+      margin-top: 7px;
+      box-shadow: 1px 1px lightgray;
+      background-color: white;
+      border-radius:50%;
+      border: 1px solid lightgray;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer:after {
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-bubble {
+      bottom: 14px;
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-limit {
+      font-weight: bold;
+      color: orange;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick {
+      width: 1px;
+      height: 0px;
+      margin-left: 4px;
+      border-radius: 0;
+      background: #ffe4d1;
+      top: -1px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+      background: orange;
+    }
+}
+  

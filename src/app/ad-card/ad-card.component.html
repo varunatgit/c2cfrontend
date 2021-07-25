@@ -1,0 +1,27 @@
+<div class="ad">
+    <div routerLink="/ads/{{ad.adId}}" class="d-flex">
+        <img class="item-photo" src={{ad.img1Url}}>
+    </div>
+    <div class="ad-details">
+        <div routerLink="/ads/{{ad.adId}}" class="ad-details-container">
+            <span *ngIf="ad.adType!=4" class="item-price">₹ {{ad.finalPrice}}</span>
+            <span *ngIf="ad.adType==4" class="item-price">₹ {{ad.finalPrice}}/day </span>
+            <span class="item-name mt-1">{{ad.productName}}</span>
+            <div *ngIf="isAuction" class="d-flex mt-2 align-items-center">
+                <span *ngIf="timeRemaining<86400" class="text-small">Auction ends in</span>
+                <span *ngIf="timeRemaining>=86400" class="text-small">Auction ends on</span>
+                <span *ngIf="timeRemaining>86400" class="font-700 text-large ml-2">{{ad.auctionDeadline | date}}</span>
+                <countdown *ngIf="timeRemaining<86400" class="text-large font-700 ml-2"
+                  [config]="{ leftTime: timeRemaining,format: 'HH:mm:ss'}"></countdown>
+              </div>
+        </div>
+        <div class="border-top" style="padding: 10px;">
+            <div class="d-flex align-items-center justify-content-between">
+                <svg *ngIf="!isLoggedIn" routerLink = "/sign-in" width="22px" height="22px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M830.798 448.659l-318.798 389.915-317.828-388.693c-20.461-27.171-31.263-59.345-31.263-93.033 0-85.566 69.605-155.152 155.152-155.152 72.126 0 132.752 49.552 150.051 116.364h87.777c17.299-66.812 77.905-116.364 150.051-116.364 85.547 0 155.152 69.585 155.152 155.152 0 33.687-10.802 65.862-30.293 91.811zM705.939 124.121c-80.853 0-152.204 41.425-193.939 104.204-41.736-62.778-113.086-104.204-193.939-104.204-128.33 0-232.727 104.378-232.727 232.727 0 50.657 16.194 98.948 47.806 140.897l328.766 402.133h100.189l329.716-403.355c30.662-40.727 46.856-89.018 46.856-139.675 0-128.349-104.398-232.727-232.727-232.727z"></path></svg>
+                <svg *ngIf="isSaveLoaded && !isAdSaved(ad.adId)" (click)="saveAd(ad)" width="22px" height="22px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M830.798 448.659l-318.798 389.915-317.828-388.693c-20.461-27.171-31.263-59.345-31.263-93.033 0-85.566 69.605-155.152 155.152-155.152 72.126 0 132.752 49.552 150.051 116.364h87.777c17.299-66.812 77.905-116.364 150.051-116.364 85.547 0 155.152 69.585 155.152 155.152 0 33.687-10.802 65.862-30.293 91.811zM705.939 124.121c-80.853 0-152.204 41.425-193.939 104.204-41.736-62.778-113.086-104.204-193.939-104.204-128.33 0-232.727 104.378-232.727 232.727 0 50.657 16.194 98.948 47.806 140.897l328.766 402.133h100.189l329.716-403.355c30.662-40.727 46.856-89.018 46.856-139.675 0-128.349-104.398-232.727-232.727-232.727z"></path></svg>
+                <svg *ngIf="isSaveLoaded && isAdSaved(ad.adId)" (click)="unSaveAd(ad.adId)" width="22px" height="22px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M705.941 124.121c-80.853 0-152.204 41.445-193.939 104.204-41.736-62.759-113.086-104.204-193.939-104.204-128.33 0-232.727 104.398-232.727 232.727 0 50.657 16.194 98.967 47.806 140.916l328.766 402.114h100.189l329.716-403.355c30.662-40.708 46.856-89.018 46.856-139.675 0-128.33-104.398-232.727-232.727-232.727z"></path></svg>
+                <span class="text-x-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+            </div>  
+        </div>
+    </div>
+</div>
